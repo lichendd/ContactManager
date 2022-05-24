@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component }) => {
     const { login, loading, error, clearErrors, isAuthenticated } = authContext;
 //   const [authState] = useAuth();
 //   const { isAuthenticated, loading } = authState;
-//   if (loading) return <Spinner />;
+  // if (loading) return <Spinner />;
   if (isAuthenticated) return <Component />;
   return <Navigate to="/login" />;
 };
