@@ -2,12 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
 import { Navigate } from "react-router-dom";
+// import { useAuth, clearErrors, login } from "../../context/auth/AuthState";
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
+  // const [authState, authDispatch] = useAuth();
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
@@ -18,6 +20,7 @@ const Login = (props) => {
     if (error === "Invalid Credentials") {
       setAlert(error, "danger");
       clearErrors();
+      // clearErrors(authDispatch);
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
@@ -37,12 +40,13 @@ const Login = (props) => {
       setAlert("Please fill in all fields", "danger");
     } else {
       login({
+      // login(authDispatch, {
         email,
         password,
       });
     }
   };
-  
+
   if (isAuthenticated) return <Navigate to="/" />;
 
   return (
